@@ -1,0 +1,27 @@
+type: custom:gauge-card-pro
+entity: sensor.apollo_air_1_7ddddc_pm_2_5mm_weight_concentration
+use_new_from_segments_style: true
+segments:
+  - from: 0
+    color: green
+  - from: 12
+    color: yellow
+  - from: 35
+    color: orange
+  - from: 55
+    color: red
+needle: true
+gradient: true
+gradient_resolution: high
+grid_options:
+  columns: 6
+  rows: 3
+hide_background: true
+entity2: sensor.apollo_air_1_7ddddc_pm_10mm_weight_concentration
+min: 0
+max: 100
+titles:
+  primary: PM2.5/10 (μg/m³)
+value_texts:
+  primary_unit: " "
+  secondary_unit: " "
