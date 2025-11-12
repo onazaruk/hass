@@ -1,0 +1,50 @@
+type: custom:modern-circular-gauge
+entity: sensor.apollo_air_1_7ddddc_co2
+gauge_foreground_style:
+  color: adaptive
+gauge_background_style:
+  width: 2
+  color: adaptive
+max: 4000
+smooth_segments: true
+adaptive_icon_color: true
+segments:
+  - from: 0
+    color:
+      - 24
+      - 130
+      - 3
+    label: PERFECT
+  - from: 800
+    color:
+      - 200
+      - 214
+      - 0
+    label: GOOD
+  - from: 1500
+    color:
+      - 204
+      - 129
+      - 0
+    label: AVERAGE
+  - from: 2500
+    color:
+      - 255
+      - 0
+      - 0
+    label: BAD
+  - color:
+      - 129
+      - 19
+      - 99
+    from: 3700
+    label: DEADLY
+name: " "
+show_unit: false
+adaptive_state_color: true
+secondary: {}
+tertiary: {}
+gauge_type: standard
+show_header: false
+show_icon: true
+header_position: bottom

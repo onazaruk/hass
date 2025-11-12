@@ -1,0 +1,461 @@
+- type: custom:expander-card
+  child-margin-top: 0.6em
+  padding: 0
+  clear: true
+  title-card-button-overlay: false
+  title-card-clickable: false
+  expanded: false
+  title-card:
+    type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: active lights
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: light.all_lights
+        icon: mdi:lightbulb-group
+        tap_action:
+          action: call-service
+          service: light.turn_off
+          target:
+            entity_id: light.all_lights
+        hold_action:
+          action: more-info
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - box-shadow: none
+            - height: 100%
+            - font-size: 90%
+          state:
+            - justify-self: center
+      - type: custom:button-card
+        entity: sensor.lights_on_count
+        name: false
+        icon: false
+        show_state: true
+        show_name: false
+        show_icon: false
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - background: none
+            - box-shadow: none
+            - height: 100%
+          state:
+            - justify-self: center
+            - font-size: 65px
+            - font-weight: bold
+  cards:
+    - type: custom:auto-entities
+      card:
+        type: entities
+      show_empty: false
+      unique: true
+      filter:
+        include:
+          - options:
+              type: custom:compact-light-card
+              use_entity_icon: true
+            domain: light
+            state: 'on'
+        exclude:
+          - options: {}
+            label: group
+      sort:
+        method: friendly_name
+- type: custom:expander-card
+  child-margin-top: 0.6em
+  padding: 0
+  clear: true
+  title-card-button-overlay: false
+  title-card-clickable: false
+  expanded: false
+  title-card:
+    type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: outdoor
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: light.outdoor_lights
+        icon: mdi:tree
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - box-shadow: none
+            - height: 100%
+            - font-size: 90%
+          state:
+            - justify-self: center
+      - type: custom:button-card
+        entity: sensor.outdoor_lights_count
+        name: false
+        icon: false
+        show_state: true
+        show_name: false
+        show_icon: false
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - background: none
+            - box-shadow: none
+            - height: 100%
+          state:
+            - justify-self: center
+            - font-size: 65px
+            - font-weight: bold
+  cards:
+    - type: heading
+      icon: mdi:tree
+      heading: Front yard
+      heading_style: title
+    - type: custom:compact-light-card
+      entity: light.exterior_sconces
+      icon: mdi:wall-sconce
+    - type: custom:compact-light-card
+      entity: light.exterior_driveway_light
+      icon: mdi:light-flood-down
+    - type: heading
+      icon: mdi:forest
+      heading: Back yard
+      heading_style: title
+    - type: custom:compact-light-card
+      entity: light.flood_light_side_yard
+      icon: mdi:light-flood-down
+    - type: custom:compact-light-card
+      entity: light.pergola_lights
+      icon: mdi:string-lights
+- type: custom:expander-card
+  child-margin-top: 0.6em
+  padding: 0
+  clear: true
+  title-card-button-overlay: false
+  title-card-clickable: false
+  expanded: false
+  title-card:
+    type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: downstairs
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: light.kitchen_lights
+        icon: mdi:fridge
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - box-shadow: none
+            - height: 100%
+            - font-size: 90%
+          state:
+            - justify-self: center
+      - type: custom:button-card
+        entity: sensor.kitchen_lights_count
+        name: false
+        icon: false
+        show_state: true
+        show_name: false
+        show_icon: false
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - background: none
+            - box-shadow: none
+            - height: 100%
+          state:
+            - justify-self: center
+            - font-size: 65px
+            - font-weight: bold
+  cards:
+    - type: custom:compact-light-card
+      entity: light.light_kitchen_counter_cooktop
+      icon: mdi:led-strip-variant
+    - type: custom:compact-light-card
+      entity: light.light_strip_countertop_kitchen_oven
+      icon: mdi:led-strip-variant
+    - type: custom:compact-light-card
+      entity: light.light_strip_kitchen_countertop_pantry
+      icon: mdi:led-strip-variant
+    - type: custom:compact-light-card
+      entity: light.kitchen_main_lights
+      icon: mdi:light-recessed
+    - type: custom:compact-light-card
+      entity: light.kitchen_island_pendants
+      icon: mdi:ceiling-light-multiple
+    - type: custom:compact-light-card
+      entity: light.kitchen_pantry
+      icon: mdi:light-recessed
+    - type: custom:compact-light-card
+      entity: light.dining_room_chandelier
+      icon: mdi:chandelier
+    - type: custom:compact-light-card
+      entity: light.living_room_recessed_lights
+      icon: mdi:light-recessed
+- type: custom:expander-card
+  child-margin-top: 0.6em
+  padding: 0
+  clear: true
+  title-card-button-overlay: false
+  title-card-clickable: false
+  expanded: false
+  title-card:
+    type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: hall
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: light.foyer_lights
+        icon: mdi:door
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - box-shadow: none
+            - height: 100%
+            - font-size: 90%
+          state:
+            - justify-self: center
+      - type: custom:button-card
+        entity: sensor.foyer_lights_count
+        name: false
+        icon: false
+        show_state: true
+        show_name: false
+        show_icon: false
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - background: none
+            - box-shadow: none
+            - height: 100%
+          state:
+            - justify-self: center
+            - font-size: 65px
+            - font-weight: bold
+  cards:
+    - type: custom:compact-light-card
+      entity: light.front_foyer_chandelier
+      icon: mdi:lightbulb
+    - type: custom:compact-light-card
+      entity: light.front_foyer_main_lights
+      icon: mdi:lightbulb
+    - type: custom:compact-light-card
+      entity: light.stairs_step_lights
+      icon: mdi:lightbulb
+- type: custom:expander-card
+  child-margin-top: 0.6em
+  padding: 0
+  clear: true
+  title-card-button-overlay: false
+  title-card-clickable: false
+  expanded: false
+  height: 100px
+  title-card:
+    type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: office
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: light.office_lights
+        icon: mdi:desk-lamp
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - box-shadow: none
+            - height: 100%
+            - font-size: 90%
+          state:
+            - justify-self: center
+      - type: custom:button-card
+        entity: sensor.office_lights_count_template
+        name: false
+        icon: false
+        show_state: true
+        show_name: false
+        show_icon: false
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - background: none
+            - box-shadow: none
+            - height: 100%
+          state:
+            - justify-self: center
+            - font-size: 65px
+            - font-weight: bold
+  cards:
+    - type: custom:compact-light-card
+      entity: light.office_desk
+      icon: mdi:led-strip-variant
+    - type: custom:compact-light-card
+      entity: light.yeelight_lamp15_0xeea7b0a_ambilight
+      icon: mdi:led-strip
+    - type: custom:compact-light-card
+      entity: light.yeelight_lamp15_0xeea7b0a
+      icon: mdi:led-strip
+    - type: custom:compact-light-card
+      entity: light.office_lamp_1
+      icon: mdi:lightbulb
+    - type: custom:compact-light-card
+      entity: light.office_lamp_2
+      icon: mdi:lightbulb
+    - type: custom:compact-light-card
+      entity: light.light_bulb_power_office
+      icon: mdi:lightbulb
+    - type: custom:compact-light-card
+      entity: light.led_server_rack
+      icon: mdi:led-strip-variant
+    - type: custom:compact-light-card
+      entity: light.led_server_big
+      icon: mdi:led-strip-variant
+- type: custom:expander-card
+  child-margin-top: 0.6em
+  padding: 0
+  clear: true
+  title-card-button-overlay: false
+  title-card-clickable: false
+  expanded: false
+  title-card:
+    type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: master
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: light.master_bedroom_lights
+        icon: mdi:bed-king
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - box-shadow: none
+            - height: 100%
+            - font-size: 90%
+          state:
+            - justify-self: center
+      - type: custom:button-card
+        entity: sensor.master_bedroom_lights_count
+        name: false
+        icon: false
+        show_state: true
+        show_name: false
+        show_icon: false
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        styles:
+          card:
+            - display: flex
+            - justify-content: center
+            - justify-self: center
+            - align-items: center
+            - background: none
+            - box-shadow: none
+            - height: 100%
+          state:
+            - justify-self: center
+            - font-size: 65px
+            - font-weight: bold
+  cards:
+    - type: custom:compact-light-card
+      entity: light.master_bedroom_main_lights
+      icon: mdi:chandelier
+    - type: custom:compact-light-card
+      entity: light.govee_light_strip
+      icon: mdi:led-strip-variant
+    - type: custom:compact-light-card
+      entity: light.master_toilet
+      icon: mdi:light-recessed
