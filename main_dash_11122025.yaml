@@ -1,0 +1,1416 @@
+type: sections
+max_columns: 5
+path: ""
+icon: mdi:home
+sections:
+  - type: grid
+    cards:
+      - type: custom:clock-weather-card
+        entity: weather.ua_home
+      - type: custom:hourly-weather
+        entity: weather.ua_home
+        name: " "
+        icons: true
+        show_date: boundary
+        num_segments: "12"
+        label_spacing: "2"
+        show_precipitation_amounts: false
+        show_precipitation_probability: false
+        grid_options:
+          columns: full
+      - type: custom:modern-circular-gauge
+        entity: sensor.apollo_air_1_2e3e10_carbon_monoxide
+        gauge_foreground_style:
+          color: adaptive
+        gauge_background_style:
+          width: 2
+          color: adaptive
+        smooth_segments: true
+        adaptive_icon_color: true
+        segments:
+          - from: 0
+            color:
+              - 24
+              - 130
+              - 3
+            label: PERFECT
+          - from: 5
+            color:
+              - 200
+              - 214
+              - 0
+            label: GOOD
+          - from: 15
+            color:
+              - 204
+              - 129
+              - 0
+            label: POOR
+          - from: 35
+            color:
+              - 255
+              - 0
+              - 0
+            label: BAD
+          - from: 150
+            color:
+              - 255
+              - 0
+              - 0
+            label: FATAL
+        name: " "
+        show_unit: false
+        adaptive_state_color: true
+        secondary: {}
+        tertiary: {}
+        gauge_type: standard
+        show_header: false
+        show_icon: true
+        header_position: bottom
+        grid_options:
+          columns: 3
+          rows: 3
+        icon: mdi:molecule-co
+        max: 250
+      - type: custom:modern-circular-gauge
+        entity: sensor.apollo_air_1_2e3e10_co2
+        gauge_foreground_style:
+          color: adaptive
+        gauge_background_style:
+          width: 2
+          color: adaptive
+        max: 4000
+        smooth_segments: true
+        adaptive_icon_color: true
+        segments:
+          - from: 0
+            color:
+              - 24
+              - 130
+              - 3
+            label: PERFECT
+          - from: 800
+            color:
+              - 200
+              - 214
+              - 0
+            label: GOOD
+          - from: 1500
+            color:
+              - 204
+              - 129
+              - 0
+            label: AVERAGE
+          - from: 2500
+            color:
+              - 255
+              - 0
+              - 0
+            label: BAD
+          - color:
+              - 129
+              - 19
+              - 99
+            from: 3700
+            label: DEADLY
+        name: " "
+        show_unit: false
+        adaptive_state_color: true
+        secondary: {}
+        tertiary: {}
+        gauge_type: standard
+        show_header: false
+        show_icon: true
+        header_position: bottom
+        grid_options:
+          columns: 3
+          rows: 3
+      - type: custom:modern-circular-gauge
+        entity: sensor.apollo_air_1_2e3e10_pm_2_5mm_weight_concentration
+        gauge_foreground_style:
+          color: adaptive
+        gauge_background_style:
+          width: 2
+          color: adaptive
+        max: 100
+        smooth_segments: true
+        adaptive_icon_color: true
+        segments:
+          - from: 0
+            color:
+              - 24
+              - 130
+              - 3
+            label: PERFECT
+          - from: 12
+            color:
+              - 200
+              - 214
+              - 0
+            label: GOOD
+          - from: 35
+            color:
+              - 204
+              - 129
+              - 0
+            label: AVERAGE
+          - from: 55
+            color:
+              - 255
+              - 0
+              - 0
+            label: BAD
+        name: " "
+        show_unit: false
+        adaptive_state_color: true
+        secondary: {}
+        tertiary: {}
+        gauge_type: standard
+        show_header: false
+        show_icon: true
+        header_position: bottom
+        grid_options:
+          columns: 3
+          rows: 3
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        clear: true
+        title-card-button-overlay: false
+        title-card-clickable: false
+        expanded: false
+        title-card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              name: active lights
+              show_name: true
+              show_state: false
+              show_icon: true
+              entity: light.all_lights
+              icon: mdi:lightbulb-group
+              tap_action:
+                action: call-service
+                service: light.turn_off
+                target:
+                  entity_id: light.all_lights
+              hold_action:
+                action: more-info
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - box-shadow: none
+                  - height: 100%
+                  - font-size: 90%
+                state:
+                  - justify-self: center
+            - type: custom:button-card
+              entity: sensor.lights_on_count
+              name: false
+              icon: false
+              show_state: true
+              show_name: false
+              show_icon: false
+              tap_action:
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - background: none
+                  - box-shadow: none
+                  - height: 100%
+                state:
+                  - justify-self: center
+                  - font-size: 65px
+                  - font-weight: bold
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: entities
+            show_empty: false
+            unique: true
+            filter:
+              include:
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  domain: light
+                  state: "on"
+              exclude:
+                - options: {}
+                  label: group
+            sort:
+              method: friendly_name
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        clear: true
+        title-card-button-overlay: false
+        title-card-clickable: false
+        expanded: false
+        title-card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              name: outdoor
+              show_name: true
+              show_state: false
+              show_icon: true
+              entity: light.outdoor_lights
+              icon: mdi:tree
+              tap_action:
+                action: toggle
+              hold_action:
+                action: more-info
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - box-shadow: none
+                  - height: 100%
+                  - font-size: 90%
+                state:
+                  - justify-self: center
+            - type: custom:button-card
+              entity: sensor.outdoor_lights_count
+              name: false
+              icon: false
+              show_state: true
+              show_name: false
+              show_icon: false
+              tap_action:
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - background: none
+                  - box-shadow: none
+                  - height: 100%
+                state:
+                  - justify-self: center
+                  - font-size: 65px
+                  - font-weight: bold
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: entities
+            show_empty: false
+            unique: true
+            filter:
+              include:
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: exterior
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fi ll_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: back_porch
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: sideyard
+                  domain: light
+              exclude:
+                - options: {}
+                  label: group
+            sort:
+              method: friendly_name
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        clear: true
+        title-card-button-overlay: false
+        title-card-clickable: false
+        expanded: false
+        title-card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              name: downstairs
+              show_name: true
+              show_state: false
+              show_icon: true
+              entity: light.kitchen_lights
+              icon: mdi:fridge
+              tap_action:
+                action: toggle
+              hold_action:
+                action: more-info
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - box-shadow: none
+                  - height: 100%
+                  - font-size: 90%
+                state:
+                  - justify-self: center
+            - type: custom:button-card
+              entity: sensor.kitchen_lights_count
+              name: false
+              icon: false
+              show_state: true
+              show_name: false
+              show_icon: false
+              tap_action:
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - background: none
+                  - box-shadow: none
+                  - height: 100%
+                state:
+                  - justify-self: center
+                  - font-size: 65px
+                  - font-weight: bold
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: entities
+            show_empty: false
+            unique: true
+            filter:
+              include:
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: kitchen
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fi ll_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: dining_room
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: living_room
+                  domain: light
+              exclude:
+                - options: {}
+                  label: group
+            sort:
+              method: friendly_name
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        clear: true
+        title-card-button-overlay: false
+        title-card-clickable: false
+        expanded: false
+        title-card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              name: hall
+              show_name: true
+              show_state: false
+              show_icon: true
+              entity: light.foyer_lights
+              icon: mdi:door
+              tap_action:
+                action: toggle
+              hold_action:
+                action: more-info
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - box-shadow: none
+                  - height: 100%
+                  - font-size: 90%
+                state:
+                  - justify-self: center
+            - type: custom:button-card
+              entity: sensor.foyer_lights_count
+              name: false
+              icon: false
+              show_state: true
+              show_name: false
+              show_icon: false
+              tap_action:
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - background: none
+                  - box-shadow: none
+                  - height: 100%
+                state:
+                  - justify-self: center
+                  - font-size: 65px
+                  - font-weight: bold
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: entities
+            show_empty: false
+            unique: true
+            filter:
+              include:
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: stairs
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fi ll_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: powder_bath
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: front_foyer
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: mudroom
+                  domain: light
+              exclude:
+                - options: {}
+                  label: group
+            sort:
+              method: friendly_name
+  - type: grid
+    cards:
+      - type: thermostat
+        entity: climate.office
+        grid_options:
+          columns: full
+          rows: 6
+        features:
+          - type: climate-hvac-modes
+      - type: custom:modern-circular-gauge
+        entity: sensor.apollo_air_1_7ddddc_co2
+        gauge_foreground_style:
+          color: adaptive
+        gauge_background_style:
+          width: 2
+          color: adaptive
+        max: 4000
+        smooth_segments: true
+        adaptive_icon_color: true
+        segments:
+          - from: 0
+            color:
+              - 24
+              - 130
+              - 3
+            label: PERFECT
+          - from: 800
+            color:
+              - 200
+              - 214
+              - 0
+            label: GOOD
+          - from: 1500
+            color:
+              - 204
+              - 129
+              - 0
+            label: AVERAGE
+          - from: 2500
+            color:
+              - 255
+              - 0
+              - 0
+            label: BAD
+          - color:
+              - 129
+              - 19
+              - 99
+            from: 3700
+            label: DEADLY
+        name: " "
+        show_unit: false
+        adaptive_state_color: true
+        secondary: {}
+        tertiary: {}
+        gauge_type: standard
+        show_header: false
+        show_icon: true
+        header_position: bottom
+        grid_options:
+          columns: 6
+          rows: 3
+      - type: custom:modern-circular-gauge
+        entity: sensor.apollo_air_1_7ddddc_pm_2_5mm_weight_concentration
+        gauge_foreground_style:
+          color: adaptive
+        gauge_background_style:
+          width: 2
+          color: adaptive
+        max: 100
+        smooth_segments: true
+        adaptive_icon_color: true
+        segments:
+          - from: 0
+            color:
+              - 24
+              - 130
+              - 3
+            label: PERFECT
+          - from: 12
+            color:
+              - 200
+              - 214
+              - 0
+            label: GOOD
+          - from: 35
+            color:
+              - 204
+              - 129
+              - 0
+            label: AVERAGE
+          - from: 55
+            color:
+              - 255
+              - 0
+              - 0
+            label: BAD
+        name: " "
+        show_unit: false
+        adaptive_state_color: true
+        secondary: {}
+        tertiary: {}
+        gauge_type: standard
+        show_header: false
+        show_icon: true
+        header_position: bottom
+        grid_options:
+          columns: 6
+          rows: 3
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        clear: true
+        title-card-button-overlay: false
+        title-card-clickable: false
+        expanded: false
+        height: 100px
+        title-card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              name: office
+              show_name: true
+              show_state: false
+              show_icon: true
+              entity: light.office_lights
+              icon: mdi:desk-lamp
+              tap_action:
+                action: toggle
+              hold_action:
+                action: more-info
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - box-shadow: none
+                  - height: 100%
+                  - font-size: 90%
+                state:
+                  - justify-self: center
+            - type: custom:button-card
+              entity: sensor.office_lights_count_template
+              name: false
+              icon: false
+              show_state: true
+              show_name: false
+              show_icon: false
+              tap_action:
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - background: none
+                  - box-shadow: none
+                  - height: 100%
+                state:
+                  - justify-self: center
+                  - font-size: 65px
+                  - font-weight: bold
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: entities
+            show_empty: false
+            unique: true
+            filter:
+              include:
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: office
+                  domain: light
+              exclude:
+                - options: {}
+                  label: group
+            sort:
+              method: friendly_name
+      - show_name: false
+        show_icon: true
+        show_state: true
+        type: glance
+        entities:
+          - entity: binary_sensor.aqara_presence_sensor_fp2_presence_sensor_1
+          - entity: sensor.guitar_temp_hydro_sensor_temperature
+          - entity: sensor.office_humidity
+          - entity: binary_sensor.door_server
+        grid_options:
+          columns: 12
+          rows: auto
+        state_color: true
+      - type: custom:mini-media-player
+        entity: media_player.office_speaker
+        artwork: cover
+        group: true
+        volume_stateless: false
+        hide:
+          source: false
+          power: true
+          icon: false
+          volume: false
+        source: icon
+        sound_mode: full
+        info: short
+        toggle_power: false
+  - type: grid
+    cards:
+      - type: thermostat
+        entity: climate.master_bedroom
+        show_current_as_primary: false
+        grid_options:
+          columns: full
+          rows: 6
+        features:
+          - type: climate-hvac-modes
+      - type: custom:modern-circular-gauge
+        entity: sensor.apollo_air_1_88e7a8_co2
+        gauge_foreground_style:
+          color: adaptive
+        gauge_background_style:
+          width: 2
+          color: adaptive
+        max: 4000
+        smooth_segments: true
+        adaptive_icon_color: true
+        segments:
+          - from: 0
+            color:
+              - 24
+              - 130
+              - 3
+            label: PERFECT
+          - from: 500
+            color:
+              - 200
+              - 214
+              - 0
+            label: GOOD
+          - from: 1500
+            color:
+              - 204
+              - 129
+              - 0
+            label: AVERAGE
+          - from: 2500
+            color:
+              - 255
+              - 0
+              - 0
+            label: BAD
+          - color:
+              - 129
+              - 19
+              - 99
+            from: 3700
+            label: DEADLY
+        name: " "
+        show_unit: false
+        adaptive_state_color: true
+        secondary: {}
+        tertiary: {}
+        gauge_type: standard
+        show_header: false
+        show_icon: true
+        header_position: bottom
+        grid_options:
+          columns: 6
+          rows: 3
+      - type: custom:modern-circular-gauge
+        entity: sensor.apollo_air_1_88e7a8_pm_2_5mm_weight_concentration
+        gauge_foreground_style:
+          color: adaptive
+        gauge_background_style:
+          width: 2
+          color: adaptive
+        max: 100
+        smooth_segments: true
+        adaptive_icon_color: true
+        segments:
+          - from: 0
+            color:
+              - 24
+              - 130
+              - 3
+            label: PERFECT
+          - from: 12
+            color:
+              - 200
+              - 214
+              - 0
+            label: GOOD
+          - from: 35
+            color:
+              - 204
+              - 129
+              - 0
+            label: AVERAGE
+          - from: 55
+            color:
+              - 255
+              - 0
+              - 0
+            label: BAD
+        name: " "
+        show_unit: false
+        adaptive_state_color: true
+        secondary: {}
+        tertiary: {}
+        gauge_type: standard
+        show_header: false
+        show_icon: true
+        header_position: bottom
+        grid_options:
+          columns: 6
+          rows: 3
+      - type: tile
+        grid_options:
+          columns: full
+        entity: cover.curtain_master_bedroom_curtain
+        name: " "
+        icon: mdi:curtains-closed
+        show_entity_picture: false
+        hide_state: false
+        vertical: false
+        features:
+          - type: cover-open-close
+          - type: cover-position
+        features_position: bottom
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        clear: true
+        title-card-button-overlay: false
+        title-card-clickable: false
+        expanded: false
+        title-card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              name: master
+              show_name: true
+              show_state: false
+              show_icon: true
+              entity: light.master_bedroom_lights
+              icon: mdi:bed-king
+              tap_action:
+                action: toggle
+              hold_action:
+                action: more-info
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - box-shadow: none
+                  - height: 100%
+                  - font-size: 90%
+                state:
+                  - justify-self: center
+            - type: custom:button-card
+              entity: sensor.master_bedroom_lights_count
+              name: false
+              icon: false
+              show_state: true
+              show_name: false
+              show_icon: false
+              tap_action:
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              styles:
+                card:
+                  - display: flex
+                  - justify-content: center
+                  - justify-self: center
+                  - align-items: center
+                  - background: none
+                  - box-shadow: none
+                  - height: 100%
+                state:
+                  - justify-self: center
+                  - font-size: 65px
+                  - font-weight: bold
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: entities
+            show_empty: false
+            unique: true
+            filter:
+              include:
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fill_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: master_bath
+                  domain: light
+                - options:
+                    type: custom:mushroom-light-card
+                    use_light_color: true
+                    show_brightness_control: true
+                    fi ll_container: true
+                    collapsible_controls: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    layout: horizontal
+                  area: master_bedroom
+                  domain: light
+              exclude:
+                - options: {}
+                  label: group
+            sort:
+              method: friendly_name
+      - type: custom:mini-media-player
+        entity: media_player.lg_webos_smart_tv
+        group: true
+        volume_stateless: false
+        toggle_power: false
+        hide:
+          - power: true
+      - type: custom:mini-media-player
+        entity: media_player.living_room_2
+        artwork: cover
+        group: true
+        volume_stateless: false
+        hide:
+          source: false
+          power: true
+          icon: false
+          volume: false
+        source: icon
+        sound_mode: full
+        info: short
+        toggle_power: false
+cards: []
+badges:
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: lock.eufy_familock_s3_max
+    name: front
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.tesla_battery_level
+    name: tesla
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.tesla_state
+    icon: mdi:battery-charging-medium
+    name: tesla
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: state
+        entity: sensor.tesla_state
+        state: charging
+  - type: entity
+    show_name: true
+    name: garage
+    show_state: true
+    show_icon: true
+    entity: sensor.garage_sensors_temperature
+  - type: entity
+    show_name: false
+    show_state: true
+    show_icon: true
+    entity: sensor.power_home
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_attic_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_attic_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_attic_battery
+            state: unavailable
+    name: Leak Attic AC
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_attic
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_attic
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_attic
+            state: unavailable
+    name: Leak Attic AC
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_attic_heater_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_attic_heater_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_attic_heater_battery
+            state: unavailable
+    name: Leak Attic Heater
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_attic_heater
+    name: Leak Attic Heater
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_attic_heater
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_attic_heater
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_guest_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_guest_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_guest_battery
+            state: unavailable
+    name: Leak Guest
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_guest
+    name: Leak Guest
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_guest
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_guest
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_utility_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_utility_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_utility_battery
+            state: unavailable
+    name: Leak Utility
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_utility
+    name: Leak Utility
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_utility
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_utility
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_kitchen_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_kitchen_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_kitchen_battery
+            state: unavailable
+    name: Leak Kitchen
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_kitchen
+    name: Leak Kitchen
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_kitchen
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_kitchen
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_kitchen_ref_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_kitchen_ref_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_kitchen_ref_battery
+            state: unavailable
+    name: Leak Kitchen Fridge
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_kitchen_ref
+    name: Leak Kitchen Fridge
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_ref_kitchen
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_ref_kitchen
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_master_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_master_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_master_battery
+            state: unavailable
+    name: Leak Master
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_master
+    name: Leak Master
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_master
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_master
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_mia_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_mia_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_mia_battery
+            state: unavailable
+    name: Leak Mia
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_mia
+    name: Leak Mia
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_mia
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_mia
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_powder_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_powder_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_powder_battery
+            state: unavailable
+    name: Leak Powder
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_powder
+    name: Leak Powder
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_powder
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_powder
+            state: unavailable
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: sensor.leak_sink_battery
+    icon: mdi:battery
+    show_entity_picture: false
+    state_content: state
+    visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity: sensor.leak_sink_battery
+            below: 10
+          - condition: state
+            entity: sensor.leak_sink_battery
+            state: unavailable
+    name: Leak Sink
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: binary_sensor.leak_sink
+    name: Leak Sink
+    show_entity_picture: false
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.leak_sink
+            state: "on"
+          - condition: state
+            entity: binary_sensor.leak_sink
+            state: unavailable
